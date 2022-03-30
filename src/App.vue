@@ -1,26 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <live-form @add="handleAdd" />
+  <live-list :items="items" @delete="handleDelete" />
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { reactive } from "vue";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+import LiveList from "./components/LiveList.vue";
+import LiveForm from "./components/LiveForm.vue";
+
+const items = reactive(["1", "2", "4"]);
+
+const handleDelete = (key) => {
+  items.splice(key, 1);
+};
+
+const handleAdd = (value) => {
+  items.push(value);
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
